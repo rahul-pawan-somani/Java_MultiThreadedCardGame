@@ -3,6 +3,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -13,8 +14,9 @@ public class Player implements Runnable {
     private final CardDeck leftDeck;
     private final CardDeck rightDeck;
     private final Lock lock = new ReentrantLock();
-    private boolean hasWon = false;
     private final String outputFile;
+    private static volatile boolean gameWon = false; // Shared flag to stop all threads
+    private boolean hasWon = false;
 
     public Player(int id, int preferredValue, CardDeck leftDeck, CardDeck rightDeck) {
         this.id = id;
@@ -84,13 +86,20 @@ public class Player implements Runnable {
             Card drawnCard = leftDeck.drawCard();
             if (drawnCard != null) {
                 hand.add(drawnCard);
+
+                // Randomly pick a non-preferred card to discard
+                Random random = new Random();
                 Card discard = hand.stream()
                         .filter(card -> card.getValue() != preferredValue)
+                        .skip(random
+                                .nextInt((int) hand.stream().filter(card -> card.getValue() != preferredValue).count()))
                         .findFirst()
                         .orElse(hand.get(0));
+
                 hand.remove(discard);
                 rightDeck.addCardToBottom(discard);
 
+                // Log actions
                 String log = String.format("player %d draws a %d from deck %d", id, drawnCard.getValue(), id);
                 writeToFile(log);
 
@@ -126,13 +135,15 @@ public class Player implements Runnable {
 
         if (checkWinningCondition()) {
             hasWon = true;
+            gameWon = true; // Set the shared flag
             System.out.println("Player " + id + " wins");
             logExit("player " + id + " wins");
         } else {
-            while (!hasWon) {
+            while (!gameWon) { // Stop if another player has already won
                 playTurn();
                 if (checkWinningCondition()) {
                     hasWon = true;
+                    gameWon = true; // Set the shared flag
                     System.out.println("Player " + id + " wins");
                     logExit("player " + id + " wins");
                 }

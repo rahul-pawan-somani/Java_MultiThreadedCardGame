@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CardGame {
@@ -17,6 +18,9 @@ public class CardGame {
             System.out.println("Invalid pack file.");
             return;
         }
+
+        // Shuffle the pack to introduce randomness
+        Collections.shuffle(cardValues);
 
         List<Player> players = new ArrayList<>();
         List<CardDeck> decks = new ArrayList<>();

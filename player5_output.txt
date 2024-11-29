@@ -1,0 +1,32 @@
+player 5 initial hand 7 7 5 4
+player 5 draws a 1 from deck 5
+player 5 discards a 7 to deck 2
+player 5 current hand 7 5 4 1
+player 5 draws a 1 from deck 5
+player 5 discards a 1 to deck 2
+player 5 current hand 7 5 4 1
+player 5 draws a 6 from deck 5
+player 5 discards a 4 to deck 2
+player 5 current hand 7 5 1 6
+player 5 draws a 4 from deck 5
+player 5 discards a 1 to deck 2
+player 5 current hand 7 5 6 4
+player 5 draws a 7 from deck 5
+player 5 discards a 6 to deck 2
+player 5 current hand 7 5 4 7
+player 5 draws a 1 from deck 5
+player 5 discards a 7 to deck 2
+player 5 current hand 5 4 7 1
+player 5 draws a 5 from deck 5
+player 5 discards a 4 to deck 2
+player 5 current hand 5 7 1 5
+player 5 draws a 1 from deck 5
+player 5 discards a 7 to deck 2
+player 5 current hand 5 1 5 1
+player 5 draws a 7 from deck 5
+player 5 discards a 7 to deck 2
+player 5 current hand 5 1 5 1
+player 1 has informed player 5 that player 1 has won
+player 1 has informed player 5 that player 1 has won
+player 5 exits
+player 5 final hand: 5 1 5 1
