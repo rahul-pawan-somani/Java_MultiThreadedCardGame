@@ -1,0 +1,29 @@
+player 4 initial hand 6 7 1 4
+player 4 draws a 7 from deck 4
+player 4 discards a 7 to deck 1
+player 4 current hand 6 1 4 7
+player 4 draws a 4 from deck 4
+player 4 discards a 1 to deck 1
+player 4 current hand 6 4 7 4
+player 4 draws a 5 from deck 4
+player 4 discards a 5 to deck 1
+player 4 current hand 6 4 7 4
+player 4 draws a 1 from deck 4
+player 4 discards a 1 to deck 1
+player 4 current hand 6 4 7 4
+player 4 draws a 5 from deck 4
+player 4 discards a 7 to deck 1
+player 4 current hand 6 4 4 5
+player 4 draws a 1 from deck 4
+player 4 discards a 1 to deck 1
+player 4 current hand 6 4 4 5
+player 4 draws a 4 from deck 4
+player 4 discards a 6 to deck 1
+player 4 current hand 4 4 5 4
+player 4 draws a 5 from deck 4
+player 4 discards a 5 to deck 1
+player 4 current hand 4 4 5 4
+player 1 has informed player 4 that player 1 has won
+player 1 has informed player 4 that player 1 has won
+player 4 exits
+player 4 final hand: 4 4 5 4
