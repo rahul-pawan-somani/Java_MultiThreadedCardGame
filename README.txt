@@ -9,6 +9,7 @@ The resources directory has 8 packs, each pack is used to test specific scenario
     - pack8.txt (2 players) [always 2 winners]
 
 To run:
+- make sure you have a folder called "output" in the same directory as the "resources" directory
 - execute the CardGame file as it contains the main class.
 - you will be asked to provide the number of players [for example 3]
 - next you will be prompted to give the location of a valid pack, to you any of the packs mentioned above you the location "resources\__.txt"
