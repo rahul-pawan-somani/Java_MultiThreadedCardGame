@@ -1,3 +1,5 @@
+package cards;
+
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.locks.Lock;
@@ -8,6 +10,9 @@ public class CardDeck {
     private final Lock lock = new ReentrantLock();
 
     public void addCard(Card card) {
+        if (card == null) {
+            throw new CardDeckException("Cannot add a null card to the deck.");
+        }
         lock.lock();
         try {
             cards.add(card);
@@ -26,6 +31,9 @@ public class CardDeck {
     }
 
     public void addCardToBottom(Card card) {
+        if (card == null) {
+            throw new CardDeckException("Cannot add a null card to the bottom of the deck.");
+        }
         lock.lock();
         try {
             cards.add(card);
