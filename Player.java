@@ -1,3 +1,5 @@
+package cards;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,6 +9,12 @@ import java.util.Random;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/*
+to make Multhithreadning code more flexible , efficient and reduce amount of errors,
+we are using lock and reentrantlock interfaces
+to give code specific conditions when our code is going to run which player without breaking parallel execution.
+*/
+
 public class Player implements Runnable {
     private final int id;
     private final int preferredValue;
@@ -15,15 +23,18 @@ public class Player implements Runnable {
     private final CardDeck rightDeck;
     private final Lock lock = new ReentrantLock();
     private final String outputFile;
-    private static volatile boolean gameWon = false; // Shared flag to stop all threads
+    private static volatile boolean gameWon = false;
     private boolean hasWon = false;
 
     public Player(int id, int preferredValue, CardDeck leftDeck, CardDeck rightDeck) {
+        if (id <= 0) {
+            throw new PlayerException("Player ID cannot be negative.");
+        }
         this.id = id;
         this.preferredValue = preferredValue;
         this.leftDeck = leftDeck;
         this.rightDeck = rightDeck;
-        this.outputFile = "player" + id + "_output.txt";
+        this.outputFile = "output/player" + id + "_output.txt";
     }
 
     public int getId() {
@@ -35,6 +46,9 @@ public class Player implements Runnable {
     }
 
     public void receiveCard(Card card) {
+        if (card == null) {
+            throw new PlayerException("Cannot receive a null card.");
+        }
         lock.lock();
         try {
             hand.add(card);
@@ -63,7 +77,7 @@ public class Player implements Runnable {
             writer.write(content);
             writer.newLine();
         } catch (IOException e) {
-            e.printStackTrace();
+            e.getStackTrace();
         }
     }
 
@@ -135,15 +149,15 @@ public class Player implements Runnable {
 
         if (checkWinningCondition()) {
             hasWon = true;
-            gameWon = true; // Set the shared flag
+            gameWon = true;
             System.out.println("Player " + id + " wins");
             logExit("player " + id + " wins");
         } else {
-            while (!gameWon) { // Stop if another player has already won
+            while (!gameWon) {
                 playTurn();
                 if (checkWinningCondition()) {
                     hasWon = true;
-                    gameWon = true; // Set the shared flag
+                    gameWon = true;
                     System.out.println("Player " + id + " wins");
                     logExit("player " + id + " wins");
                 }
